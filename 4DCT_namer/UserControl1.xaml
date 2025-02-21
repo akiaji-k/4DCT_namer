@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="VMS.TPS.Script"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VMS.TPS"
+             xmlns:local1="clr-namespace:ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="600">
+    <Grid Margin="10,0,10,30">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Patient ID" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            <TextBox Grid.Column="1" x:Name="IdTextBox" Text="{Binding Id.Value, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Patient Name" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            <TextBox Grid.Column="1" x:Name="NameTextBox" Text="{Binding Name.Value, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Timestamp" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            <ComboBox Grid.Column="1" Name="DtComboBox" IsEditable="False" 
+                      ItemsSource="{Binding DateTimeList}" 
+                      SelectedItem="{Binding SelectedDateTimeNumImages.Value}" 
+                      Margin="10,10,10,10"
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            </ComboBox>
+                     <!-- ToolTip="{Binding Path=(Validation.Errors)/ErrorContent, RelativeSource={RelativeSource Self}}" -->
+
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Comment" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            <TextBox Grid.Column="1" x:Name="CommentTextBox" Text="{Binding Comment.Value, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <Button Grid.Row ="2" Grid.Column="0" Content="{Binding SeriesName.Value}" Name="CreateButton" Margin="10,10,10,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding ClickCommand}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" 
+                   Text="※ 3D Image のみを、'位相_Comment' にリネームします。&#xA;    Series, Structure Setはリネームされません。" 
+                   TextWrapping="Wrap" 
+                   Foreground="Red" 
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+
+    </Grid>
+
+
+    <UserControl.DataContext>
+        <local1:ViewModel/>
+    </UserControl.DataContext>
+
+</UserControl>
