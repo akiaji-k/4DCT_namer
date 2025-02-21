@@ -1,4 +1,4 @@
-# 4D_CT_namer
+# 4D_CT_namer_esapi_v15_5
 
 ESAPI Binary Plugin to ease 4DCT images renaming.
 
